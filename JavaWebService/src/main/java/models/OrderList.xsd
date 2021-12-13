@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema elementFormDefault="qualified" 
+			targetNamespace="http://rtx_computershop.ua/entity/orders" 
+			xmlns:tns="http://rtx_computershop.ua/entity/orders" 
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="OrderList">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element minOccurs="1" maxOccurs="unbounded" name="Order" type="tns:Order"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="Executed">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Processing"/>
+			<xsd:enumeration value="Done"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="Contact_data">
+		<xsd:choice>
+			<xsd:element name="order_email" type="tns:Email"/>
+			<xsd:element name="order_telno" type="tns:Telno"/>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:simpleType name="Address">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="10"/>
+			<xsd:maxLength value="200"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Order_status">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="New"/>
+			<xsd:enumeration value="Accepted"/>
+			<xsd:enumeration value="Formed"/>
+			<xsd:enumeration value="Declined"/>
+			<xsd:enumeration value="Canceled"/>
+			<xsd:enumeration value="Executed"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="Shopping_cart">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="1" name="Product" type="tns:Product"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Order">
+		<xsd:complexContent>
+			<xsd:extension base="tns:Entity">
+				<xsd:sequence>
+					<xsd:element maxOccurs="1" minOccurs="1" name="User" type="tns:User"/>
+					<xsd:element maxOccurs="1" minOccurs="1" name="date_updated" type="xsd:date"/>
+					<xsd:element maxOccurs="1" minOccurs="1" name="order_status" type="tns:Order_status"/>
+					<xsd:element maxOccurs="1" minOccurs="1" name="order_contact_data" type="tns:Contact_data"/>
+					<xsd:element maxOccurs="1" minOccurs="1" name="address" type="tns:Address"/>
+					<xsd:element maxOccurs="1" minOccurs="1" name="shopping_cart" type="tns:Shopping_cart"/>
+				</xsd:sequence>
+				<xsd:attribute name="executed" type="tns:Executed" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:simpleType name="Product_amount">
+		<xsd:restriction base="xsd:int">
+			<xsd:minInclusive value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Price">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="10"/>
+			<xsd:fractionDigits value="2"/>
+			<xsd:minInclusive value="0"/>
+			<xsd:maxInclusive value="99999999"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Product_type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Graphic Card"/>
+			<xsd:enumeration value="Processor"/>
+			<xsd:enumeration value="RAM"/>
+			<xsd:enumeration value="Power Unit"/>
+			<xsd:enumeration value="Motherboard"/>
+			<xsd:enumeration value="Hard Drive"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="Product">
+		<xsd:complexContent>
+			<xsd:extension base="tns:Entity">
+				<xsd:sequence>
+					<xsd:element maxOccurs="1" minOccurs="1" name="product_name" type="xsd:string"/>
+					<xsd:element maxOccurs="1" minOccurs="1" name="product_amount" type="tns:Product_amount"/>
+					<xsd:element maxOccurs="1" minOccurs="1" name="product_price" type="tns:Price"/>
+					<xsd:element maxOccurs="1" minOccurs="1" name="product_type" type="tns:Product_type"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:simpleType name="Email">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[^@]+@[^@]+\.[^@]+"/>
+			<xsd:minLength value="5"/>
+			<xsd:maxLength value="100"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Telno">
+		<xsd:restriction base="xsd:string">
+			<xsd:length value="12"/>
+			<xsd:pattern value="380[0-9]{9,9}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="User_role">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Admin"/>
+			<xsd:enumeration value="User"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="User">
+		<xsd:complexContent>
+			<xsd:extension base="tns:Entity">
+				<xsd:sequence>
+					<xsd:element maxOccurs="1" minOccurs="1" name="user_name" type="xsd:string"/>
+					<xsd:element maxOccurs="1" minOccurs="1" name="user_surname" type="xsd:string"/>
+					<xsd:element maxOccurs="1" minOccurs="1" name="user_patronymic" type="xsd:string"/>
+					<xsd:element maxOccurs="1" minOccurs="1" name="user_email" type="tns:Email"/>
+					<xsd:element maxOccurs="1" minOccurs="1" name="user_telno" type="tns:Telno"/>
+					<xsd:element maxOccurs="1" minOccurs="1" name="user_role" type="tns:User_role"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType abstract="true" name="Entity">
+		<xsd:attribute name="id" type="tns:Entity_id" use="required"/>
+	</xsd:complexType>
+	<xsd:simpleType name="Entity_id">
+		<xsd:restriction base="xsd:int">
+			<xsd:minExclusive value="-1"/>
+			<xsd:maxExclusive value="99999999"/>
+			<xsd:pattern value="[0-9]*"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>
