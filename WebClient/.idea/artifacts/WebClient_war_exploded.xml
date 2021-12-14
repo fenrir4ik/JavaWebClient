@@ -1,14 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="WebClient:war exploded">
-    <output-path>$PROJECT_DIR$/target/WebClient-1.0-SNAPSHOT</output-path>
-    <properties id="maven-jee-properties">
-      <options>
-        <exploded>true</exploded>
-        <module>WebClient</module>
-        <packaging>war</packaging>
-        <unpackNestedArchives>false</unpackNestedArchives>
-      </options>
-    </properties>
+    <output-path>$PROJECT_DIR$/out/artifacts/WebClient_war_exploded</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -87,6 +79,7 @@
           <element id="library" level="project" name="Maven: org.apache.maven:maven-settings:3.5.2" />
           <element id="library" level="project" name="Maven: org.apache.maven.resolver:maven-resolver-api:1.1.1" />
           <element id="library" level="project" name="Maven: org.apache.maven.resolver:maven-resolver-util:1.1.1" />
+          <element id="library" level="module" name="Maven: com.sun:tools:1.6.0" module-name="WebClient" />
           <element id="library" level="project" name="Maven: org.apache.cxf:cxf-rt-frontend-jaxws:3.4.4" />
           <element id="library" level="project" name="Maven: xml-resolver:xml-resolver:1.2" />
           <element id="library" level="project" name="Maven: org.ow2.asm:asm:9.1" />
@@ -105,9 +98,6 @@
           <element id="library" level="project" name="Maven: org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1" />
           <element id="library" level="project" name="Maven: org.jboss.spec.javax.rmi:jboss-rmi-api_1.0_spec:1.0.6.Final" />
         </element>
-      </element>
-      <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/WebClient-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="WebClient/web/Web" />
     </root>
