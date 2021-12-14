@@ -11,8 +11,7 @@ public class WebServiceWorker {
     private static Orders client;
 
     public static Orders getWorker() {
-        OrdersService service = new OrdersService();
-        return service.getOrdersServicePort();
+        return client;
     }
 
     static {
@@ -24,7 +23,7 @@ public class WebServiceWorker {
         } catch (DatatypeConfigurationException e) {
             e.printStackTrace();
         }
-        if (!Objects.isNull(data)) {
+        if (!Objects.isNull(data) && client.getOrders().size() == 0) {
             for (int i = 0; i < data.size(); i++) {
                 client.addOrder(data.get(i));
             }
@@ -36,8 +35,10 @@ public class WebServiceWorker {
         XMLGregorianCalendar date = DatatypeFactory.newInstance().newXMLGregorianCalendar("2021-11-21");
         ContactData orderContactData = new ContactData();
         orderContactData.setOrderTelno("+380505793545");
-        data.add(new Order(1, date, "New", orderContactData, "Ул. Степанова, Дом 52, кв. 8", Executed.fromValue("Processing")));
-        data.add(new Order(2, date, "Executed", orderContactData, "Ул. Науки, Дом 23, кв. 141", Executed.fromValue("Done")));
+        data.add(new Order(1, date, "New", orderContactData, "Ул. Степанова, Дом 52, кв. 8"));
+        data.add(new Order(2, date, "Executed", orderContactData, "Ул. Науки, Дом 23, кв. 141"));
+        data.add(new Order(3, date, "New", orderContactData, "Ул. Сталинградская, Дом 12, кв. 32"));
+        data.add(new Order(4, date, "New", orderContactData, "Ул. Иванов, Дом 12, кв. 32"));
         return data;
     }
 }

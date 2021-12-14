@@ -66,6 +66,14 @@ public class Order
 
     public Order(){
     }
+    public Order(int id, XMLGregorianCalendar dateUpdated, String orderStatus, ContactData orderContactData, String address) {
+        this.id = id;
+        this.dateUpdated = dateUpdated;
+        this.orderStatus = orderStatus;
+        this.address = address;
+        this.executed = executed;
+        this.orderContactData = orderContactData;
+    }
 
     public Order(int id, XMLGregorianCalendar dateUpdated, String orderStatus, ContactData orderContactData, String address, Executed executed) {
         this.id = id;
@@ -74,6 +82,16 @@ public class Order
         this.address = address;
         this.executed = executed;
         this.orderContactData = orderContactData;
+    }
+
+    public Order(int id, XMLGregorianCalendar dateUpdated, String orderStatus, ContactData orderContactData, String address, Executed executed, User user) {
+        this.id = id;
+        this.dateUpdated = dateUpdated;
+        this.orderStatus = orderStatus;
+        this.address = address;
+        this.executed = executed;
+        this.orderContactData = orderContactData;
+        this.user = user;
     }
 
     /**
