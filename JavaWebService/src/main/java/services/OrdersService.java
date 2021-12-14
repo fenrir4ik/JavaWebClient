@@ -9,6 +9,7 @@ import java.util.ListIterator;
 
 @WebService(endpointInterface = "services.Orders", serviceName = "OrdersService")
 public class OrdersService implements Orders {
+    private static int iter = 0;
     private static List<Order> orderList = new ArrayList<>();
 
     @Override
@@ -29,6 +30,7 @@ public class OrdersService implements Orders {
     @Override
     public boolean addOrder(Order order) {
         boolean contains = false;
+        order.setId(++iter);
         for (Order item: orderList) {
             if (item.getId()==order.getId()) {
                 contains = true;
@@ -44,7 +46,7 @@ public class OrdersService implements Orders {
 
     @Override
     public void deleteOrder(int orderId) {
-        orderList.removeIf(e->e.getId() == orderId);
+        orderList.removeIf(e->e.getId() == orderId && !e.getOrderStatus().equals("Executed"));
     }
 
     @Override

@@ -9,7 +9,6 @@ import java.util.List;
 public class Test {
     public static List<Order> generateTestData() throws DatatypeConfigurationException {
         List<Order> data = new ArrayList<>();
-
         XMLGregorianCalendar date = DatatypeFactory.newInstance().newXMLGregorianCalendar("2021-11-21");
         ContactData orderContactData = new ContactData();
         orderContactData.setOrderTelno("+380505793545");
